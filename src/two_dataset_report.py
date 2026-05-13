@@ -139,10 +139,10 @@ def build_report(evaluations: list[dict[str, Any]]) -> str:
     lines.extend(["", "## Findings"])
 
     for evaluation in evaluations:
-        best_model = max(evaluation["results"].items(), key=lambda item: item[1]["accuracy"])
+        best_result = max(evaluation["results"].items(), key=lambda item: item[1]["accuracy"])
         lines.append(
-            f"- **{evaluation['dataset']}** best model: **{best_model[0]}** "
-            f"(accuracy **{best_model[1]['accuracy']:.4f}**, macro F1 **{best_model[1]['macro_f1']:.4f}**)."
+            f"- **{evaluation['dataset']}** best model: **{best_result[0]}** "
+            f"(accuracy **{best_result[1]['accuracy']:.4f}**, macro F1 **{best_result[1]['macro_f1']:.4f}**)."
         )
 
     lines.extend(
