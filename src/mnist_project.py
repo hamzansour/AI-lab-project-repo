@@ -66,6 +66,7 @@ def load_mnist(
 
 
 def train_models(x_train: Any, y_train: Any) -> dict[str, Any]:
+    """Train configured classification models and return fitted estimators by name."""
     models = {
         "logistic_regression": Pipeline(
             [
@@ -98,6 +99,7 @@ def train_models(x_train: Any, y_train: Any) -> dict[str, Any]:
 
 
 def evaluate_models(models: dict[str, Any], x_test: Any, y_test: Any) -> dict[str, Any]:
+    """Evaluate trained models and return accuracy, class report, and confusion matrix."""
     results = {}
     for name, model in models.items():
         predictions = model.predict(x_test)
@@ -113,6 +115,7 @@ def evaluate_models(models: dict[str, Any], x_test: Any, y_test: Any) -> dict[st
 
 
 def save_plots(results: dict[str, Any], output_dir: Path) -> None:
+    """Create and save accuracy comparison and per-model confusion matrix plots."""
     output_dir.mkdir(parents=True, exist_ok=True)
 
     accuracy_df = pd.DataFrame(
@@ -141,6 +144,7 @@ def save_plots(results: dict[str, Any], output_dir: Path) -> None:
 
 
 def save_report(results: dict[str, Any], output_dir: Path) -> None:
+    """Write a concise markdown report summarizing model comparison results."""
     output_dir.mkdir(parents=True, exist_ok=True)
 
     sorted_models = sorted(results.items(), key=lambda item: item[1]["accuracy"], reverse=True)
@@ -188,6 +192,7 @@ def save_report(results: dict[str, Any], output_dir: Path) -> None:
 
 
 def main():
+    """Run the full CLI pipeline: load data, train, evaluate, and save artifacts."""
     parser = argparse.ArgumentParser(description="MNIST final project pipeline")
     parser.add_argument("--data-dir", type=Path, default=Path("data"))
     parser.add_argument("--output-dir", type=Path, default=Path("artifacts"))
