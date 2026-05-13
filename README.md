@@ -13,10 +13,13 @@ This repository now contains a complete final-project implementation using the *
   - Accuracy comparison plot
   - Confusion matrices
   - Written report (`artifacts/report.md`)
+- A second **ready-to-present report** comparing two datasets
+  - `report_two_datasets.md`
 
 ## Project structure
 
 - `src/mnist_project.py`: end-to-end training, evaluation, and report generation
+- `src/two_dataset_report.py`: generate the two-dataset comparison report
 - `requirements.txt`: Python dependencies
 - `artifacts/`: generated outputs for your report/presentation
 
@@ -31,6 +34,12 @@ python -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
 python src/mnist_project.py
+```
+
+To generate the two-dataset comparison report:
+
+```bash
+python src/two_dataset_report.py
 ```
 
 ## Dataset usage
