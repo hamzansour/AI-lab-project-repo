@@ -138,8 +138,8 @@ def save_report(results: dict[str, Any], output_dir: Path) -> None:
     """Write a concise markdown report summarizing model comparison results."""
     output_dir.mkdir(parents=True, exist_ok=True)
 
-    sorted_results = sorted(results.items(), key=lambda item: item[1]["accuracy"], reverse=True)
-    best_model, best_metrics = sorted_results[0]
+    models_by_accuracy = sorted(results.items(), key=lambda item: item[1]["accuracy"], reverse=True)
+    best_model, best_metrics = models_by_accuracy[0]
 
     lines = [
         "# Final Project Report - MNIST Classification",
@@ -155,7 +155,7 @@ def save_report(results: dict[str, Any], output_dir: Path) -> None:
         "## Results",
     ]
 
-    for model_name, metrics in sorted_results:
+    for model_name, metrics in models_by_accuracy:
         lines.append(f"- **{model_name}** accuracy: **{metrics['accuracy']:.4f}**")
 
     lines.extend(
