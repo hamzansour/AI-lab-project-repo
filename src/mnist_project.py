@@ -23,7 +23,7 @@ LOGISTIC_MAX_ITER = 1000
 
 def load_mnist(
     data_dir: Path, test_size: float, random_state: int, sample_size: int | None, use_demo: bool
-):
+) -> tuple[Any, Any, Any, Any]:
     """Load MNIST-style data and return stratified train/test splits.
 
     Args:
@@ -112,7 +112,7 @@ def evaluate_models(models: dict[str, Any], x_test: Any, y_test: Any) -> dict[st
     return results
 
 
-def save_plots(results: dict, output_dir: Path):
+def save_plots(results: dict[str, Any], output_dir: Path) -> None:
     output_dir.mkdir(parents=True, exist_ok=True)
 
     accuracy_df = pd.DataFrame(
@@ -140,7 +140,7 @@ def save_plots(results: dict, output_dir: Path):
         plt.close()
 
 
-def save_report(results: dict, output_dir: Path):
+def save_report(results: dict[str, Any], output_dir: Path) -> None:
     output_dir.mkdir(parents=True, exist_ok=True)
 
     sorted_models = sorted(results.items(), key=lambda item: item[1]["accuracy"], reverse=True)
