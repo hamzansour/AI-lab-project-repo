@@ -18,6 +18,9 @@ ACCURACY_PLOT_PADDING = 0.05
 LOGISTIC_SOLVER = "lbfgs"
 LOGISTIC_MAX_ITER = 1000
 DEFAULT_SAMPLE_SIZE = 15000
+RF_ESTIMATORS = 300
+RF_MAX_DEPTH = 18
+RF_MIN_SAMPLES_SPLIT = 4
 
 
 def load_mnist(
@@ -73,9 +76,9 @@ def train_models(x_train: Any, y_train: Any) -> dict[str, Any]:
             random_state=42,
         ),
         "random_forest": RandomForestClassifier(
-            n_estimators=200,
-            max_depth=20,
-            min_samples_split=4,
+            n_estimators=RF_ESTIMATORS,
+            max_depth=RF_MAX_DEPTH,
+            min_samples_split=RF_MIN_SAMPLES_SPLIT,
             random_state=42,
             n_jobs=-1,
         ),

@@ -17,6 +17,9 @@ from sklearn.preprocessing import StandardScaler
 RANDOM_STATE = 42
 TEST_SIZE = 0.2
 LOGISTIC_MAX_ITER = 2000
+RF_ESTIMATORS = 300
+RF_MAX_DEPTH = 18
+RF_MIN_SAMPLES_SPLIT = 4
 
 
 @dataclass(frozen=True)
@@ -57,9 +60,9 @@ def get_models() -> dict[str, Any]:
             ]
         ),
         "Random Forest": RandomForestClassifier(
-            n_estimators=300,
-            max_depth=18,
-            min_samples_split=4,
+            n_estimators=RF_ESTIMATORS,
+            max_depth=RF_MAX_DEPTH,
+            min_samples_split=RF_MIN_SAMPLES_SPLIT,
             random_state=RANDOM_STATE,
             n_jobs=-1,
         ),
