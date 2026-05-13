@@ -15,6 +15,8 @@ from sklearn.model_selection import train_test_split
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler
 
+ACCURACY_PLOT_PADDING = 0.05
+
 
 def load_mnist(
     data_dir: Path, test_size: float, random_state: int, sample_size: int | None, use_demo: bool
@@ -56,7 +58,7 @@ def train_models(x_train, y_train):
                 (
                     "clf",
                     LogisticRegression(
-                        max_iter=1000,
+                        max_iter=5000,
                         solver="saga",
                         n_jobs=-1,
                         random_state=42,
@@ -105,7 +107,7 @@ def save_plots(results: dict, output_dir: Path):
     plt.figure(figsize=(8, 5))
     sns.barplot(data=accuracy_df, x="model", y="accuracy", hue="model", legend=False)
     min_accuracy = float(accuracy_df["accuracy"].min())
-    lower_bound = max(0.0, min_accuracy - 0.05)
+    lower_bound = max(0.0, min_accuracy - ACCURACY_PLOT_PADDING)
     plt.ylim(lower_bound, 1.0)
     plt.title("MNIST Model Accuracy Comparison")
     plt.tight_layout()
