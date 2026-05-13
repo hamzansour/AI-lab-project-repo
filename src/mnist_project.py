@@ -3,6 +3,7 @@ from __future__ import annotations
 import argparse
 import json
 from pathlib import Path
+from typing import Any
 
 import matplotlib.pyplot as plt
 import numpy as np
@@ -23,6 +24,18 @@ LOGISTIC_MAX_ITER = 1000
 def load_mnist(
     data_dir: Path, test_size: float, random_state: int, sample_size: int | None, use_demo: bool
 ):
+    """Load MNIST-style data and return stratified train/test splits.
+
+    Args:
+        data_dir: Directory expected to contain mnist_train.csv.
+        test_size: Fraction of examples reserved for testing.
+        random_state: Random seed for deterministic splitting.
+        sample_size: Optional cap on number of rows used.
+        use_demo: If True and MNIST CSV is missing, use sklearn digits data.
+
+    Returns:
+        Tuple of X_train, X_test, y_train, y_test.
+    """
     train_csv = data_dir / "mnist_train.csv"
 
     if train_csv.exists():
@@ -52,7 +65,7 @@ def load_mnist(
     return train_test_split(x, y, test_size=test_size, random_state=random_state, stratify=y)
 
 
-def train_models(x_train, y_train):
+def train_models(x_train: Any, y_train: Any) -> dict[str, Any]:
     models = {
         "logistic_regression": Pipeline(
             [
@@ -84,7 +97,7 @@ def train_models(x_train, y_train):
     return fitted
 
 
-def evaluate_models(models, x_test, y_test):
+def evaluate_models(models: dict[str, Any], x_test: Any, y_test: Any) -> dict[str, Any]:
     results = {}
     for name, model in models.items():
         predictions = model.predict(x_test)
