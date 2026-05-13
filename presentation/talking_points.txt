@@ -1,0 +1,5 @@
+1) Introduce the problem and dataset (MNIST).
+2) Explain algorithm choices: Logistic Regression vs Random Forest.
+3) Show evaluation metric: accuracy.
+4) Walk through confusion matrices and key misclassifications.
+5) Conclude with best model and future improvement ideas.
