@@ -58,7 +58,6 @@ def train_models(x_train, y_train):
                     LogisticRegression(
                         max_iter=1000,
                         solver="saga",
-                        tol=0.01,
                         n_jobs=-1,
                         random_state=42,
                     ),
@@ -105,7 +104,9 @@ def save_plots(results: dict, output_dir: Path):
     )
     plt.figure(figsize=(8, 5))
     sns.barplot(data=accuracy_df, x="model", y="accuracy", hue="model", legend=False)
-    plt.ylim(0.8, 1.0)
+    min_accuracy = float(accuracy_df["accuracy"].min())
+    lower_bound = max(0.0, min_accuracy - 0.05)
+    plt.ylim(lower_bound, 1.0)
     plt.title("MNIST Model Accuracy Comparison")
     plt.tight_layout()
     plt.savefig(output_dir / "accuracy_comparison.png", dpi=200)

@@ -4,3 +4,4 @@ __pycache__/
 artifacts/*.png
 artifacts/*.json
 artifacts/*.csv
+artifacts/*.md
