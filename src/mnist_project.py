@@ -141,7 +141,7 @@ def save_report(results: dict, output_dir: Path):
         "- Task: Multi-class classification (digits 0-9).",
         "",
         "## Compared Algorithms",
-        f"1. Logistic Regression ({LOGISTIC_SOLVER.upper()})",
+        f"1. Logistic Regression ({LOGISTIC_SOLVER})",
         "2. Random Forest Classifier",
         "",
         "## Results",
