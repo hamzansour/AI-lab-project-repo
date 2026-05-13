@@ -16,6 +16,8 @@ from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler
 
 ACCURACY_PLOT_PADDING = 0.05
+LOGISTIC_SOLVER = "lbfgs"
+LOGISTIC_MAX_ITER = 1000
 
 
 def load_mnist(
@@ -58,9 +60,8 @@ def train_models(x_train, y_train):
                 (
                     "clf",
                     LogisticRegression(
-                        max_iter=5000,
-                        solver="saga",
-                        n_jobs=-1,
+                        max_iter=LOGISTIC_MAX_ITER,
+                        solver=LOGISTIC_SOLVER,
                         random_state=42,
                     ),
                 ),
@@ -140,7 +141,7 @@ def save_report(results: dict, output_dir: Path):
         "- Task: Multi-class classification (digits 0-9).",
         "",
         "## Compared Algorithms",
-        "1. Logistic Regression (SAGA)",
+        f"1. Logistic Regression ({LOGISTIC_SOLVER.upper()})",
         "2. Random Forest Classifier",
         "",
         "## Results",
