@@ -16,7 +16,7 @@ from sklearn.model_selection import train_test_split
 
 ACCURACY_PLOT_PADDING = 0.05
 LOGISTIC_SOLVER = "lbfgs"
-LOGISTIC_MAX_ITER = 1000
+LOGISTIC_MAX_ITER = 2000
 DEFAULT_SAMPLE_SIZE = 15000
 RF_ESTIMATORS = 300
 RF_MAX_DEPTH = 18
@@ -152,7 +152,7 @@ def save_report(results: dict[str, Any], output_dir: Path) -> None:
         "- Task: Multi-class classification (digits 0-9).",
         "",
         "## Compared Algorithms",
-        f"1. Logistic Regression ({LOGISTIC_SOLVER})",
+        "1. Logistic Regression",
         "2. Random Forest Classifier",
         "",
         "## Results",
