@@ -13,12 +13,11 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
 from sklearn.model_selection import train_test_split
-from sklearn.pipeline import Pipeline
-from sklearn.preprocessing import StandardScaler
 
 ACCURACY_PLOT_PADDING = 0.05
 LOGISTIC_SOLVER = "lbfgs"
 LOGISTIC_MAX_ITER = 1000
+DEFAULT_SAMPLE_SIZE = 15000
 
 
 def load_mnist(
@@ -68,18 +67,10 @@ def load_mnist(
 def train_models(x_train: Any, y_train: Any) -> dict[str, Any]:
     """Train configured classification models and return fitted estimators by name."""
     models = {
-        "logistic_regression": Pipeline(
-            [
-                ("scaler", StandardScaler(with_mean=False)),
-                (
-                    "clf",
-                    LogisticRegression(
-                        max_iter=LOGISTIC_MAX_ITER,
-                        solver=LOGISTIC_SOLVER,
-                        random_state=42,
-                    ),
-                ),
-            ]
+        "logistic_regression": LogisticRegression(
+            max_iter=LOGISTIC_MAX_ITER,
+            solver=LOGISTIC_SOLVER,
+            random_state=42,
         ),
         "random_forest": RandomForestClassifier(
             n_estimators=200,
@@ -198,7 +189,7 @@ def main():
     parser.add_argument("--output-dir", type=Path, default=Path("artifacts"))
     parser.add_argument("--test-size", type=float, default=0.2)
     parser.add_argument("--random-state", type=int, default=42)
-    parser.add_argument("--sample-size", type=int, default=15000)
+    parser.add_argument("--sample-size", type=int, default=DEFAULT_SAMPLE_SIZE)
     parser.add_argument("--use-demo-data", action="store_true")
 
     args = parser.parse_args()
